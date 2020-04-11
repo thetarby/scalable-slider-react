@@ -1,0 +1,25 @@
+#d3slider svg line.track {
+stroke-opacity: 0.4;
+stroke: #000;
+stroke-width: 5px;
+}
+#d3slider svg line.track-inset {
+stroke: grey;
+stroke-width: 5px;
+}
+#d3slider svg line.track-overlay {
+stroke: #ccc;
+stroke-width: 40px;
+stroke-opacity: 0;
+cursor:pointer;
+}
+#d3slider svg .handle {
+fill: lightgreen;
+stroke: #000;
+}
+#d3slider svg line.track-overlay, #d3slider svg line.track, #d3slider svg line.track-inset {
+stroke-linecap: round;
+}
+.slider{
+	color: green;
+}
