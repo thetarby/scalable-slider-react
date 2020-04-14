@@ -15,8 +15,19 @@ npm install --save scalable-slider-react
 ```jsx
 import React from 'react'
 
-import {Slider } from 'scalable-slider-react'
+import { ExampleComponent, Slider } from 'scalable-slider-react'
 import 'scalable-slider-react/dist/index.css'
+const items2=[
+		  {
+		    src:"https://www1.bac-assets.com/homepage/spa-assets/images/assets-images-site-homepage-icons-contact_icon_locations_red-CSX54c6594a.svg",
+		    locations:[55,67,98,5]
+		  },
+		  {
+		    src:"https://upload.wikimedia.org/wikipedia/commons/b/b1/Yellow_card.svg",
+		    locations:[2,5,14,24]
+		  }
+]
+
 class App extends React.Component{
   	constructor() {
 	    super();
@@ -24,17 +35,17 @@ class App extends React.Component{
 			slider:{
 			  	value:5, 
 			  	options:{
-			        ceil:1000,
+			        ceil:100,
 			        floor:0,
 			  	}
 			},
 			items:[
 				{
-					src:"some-icon-link such as https://upload.wikimedia.org/wikipedia/commons/b/b1/Yellow_card.svg",
+					src:"https://www1.bac-assets.com/homepage/spa-assets/images/assets-images-site-homepage-icons-contact_icon_locations_red-CSX54c6594a.svg",
 					locations:[22,29,36,25]
 				},
 				{
-					src:"some-other-icon-link",
+					src:"https://upload.wikimedia.org/wikipedia/commons/b/b1/Yellow_card.svg",
 					locations:[2,5,14,24]
 				}
 			]
@@ -54,16 +65,20 @@ class App extends React.Component{
 	render(){
 		return (
 		<>
+			<ExampleComponent text="SLIDER IT IS 😄" />
+			<p>Double click on slider when you want to scale to default</p>
 			<p>slider value:{this.state.slider.value}</p>
 
-			<Slider fluid
-      config={{height:300, tickCount:100}} 
-      items={this.state.items} 
-      d3slider={this.state.slider}
-      handleChange={this.handleChange} />
-      
+			<Slider slider_id={1} config={{height:90}} fluid items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
 			<button onClick={this.handleClick}>increment</button>
-			<button onClick={()=>this.setState({items:items2})}>change icons</button>
+
+			<Slider slider_id={2} config={{height:90, tickCount:100}} fluid items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
+			<button onClick={this.handleClick}>increment</button>
+
+			
+			<p>This is a fixed size slider unlike above ones it does not change its width when window resizes</p>
+			<Slider slider_id={3} config={{width:500,height:90, tickCount:100}} items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
+			<button onClick={this.handleClick}>increment</button>
 
 		</>	
 		)
