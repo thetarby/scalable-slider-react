@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/scalable-slider-react/static/css/main.578f5343.chunk.css",
+    "main.js": "/scalable-slider-react/static/js/main.8a1cd4ae.chunk.js",
+    "main.js.map": "/scalable-slider-react/static/js/main.8a1cd4ae.chunk.js.map",
+    "runtime-main.js": "/scalable-slider-react/static/js/runtime-main.592ff31c.js",
+    "runtime-main.js.map": "/scalable-slider-react/static/js/runtime-main.592ff31c.js.map",
+    "static/js/2.7274df91.chunk.js": "/scalable-slider-react/static/js/2.7274df91.chunk.js",
+    "static/js/2.7274df91.chunk.js.map": "/scalable-slider-react/static/js/2.7274df91.chunk.js.map",
+    "index.html": "/scalable-slider-react/index.html",
+    "precache-manifest.482db2e35409524343ce4fc5488f3c3b.js": "/scalable-slider-react/precache-manifest.482db2e35409524343ce4fc5488f3c3b.js",
+    "service-worker.js": "/scalable-slider-react/service-worker.js",
+    "static/css/main.578f5343.chunk.css.map": "/scalable-slider-react/static/css/main.578f5343.chunk.css.map",
+    "static/js/2.7274df91.chunk.js.LICENSE.txt": "/scalable-slider-react/static/js/2.7274df91.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.592ff31c.js",
+    "static/js/2.7274df91.chunk.js",
+    "static/css/main.578f5343.chunk.css",
+    "static/js/main.8a1cd4ae.chunk.js"
+  ]
+}
