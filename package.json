@@ -1,6 +1,6 @@
 {
   "name": "scalable-slider-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A d3 based slider that you can scale some part of ",
   "author": "thetarby",
   "license": "MIT",

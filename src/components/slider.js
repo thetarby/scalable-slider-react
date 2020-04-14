@@ -32,8 +32,10 @@ export class Slider extends React.Component {
     this.handle.attr('cx', cx);
     this.handleText.attr("x",cx).text(this.props.d3slider.value);    
   }
+
+  //resizes slider to have a witdh of x pixels and scales itself.
   handleResize(x){
-    //d3.select('#d3slider').selectAll("*").remove()
+    console.log('res')
     var margin = this.config.margin,
         width = x,
         height = this.config.height,
@@ -41,7 +43,7 @@ export class Slider extends React.Component {
         var step = this.config.step; // change the step and if null, it'll switch back to a normal slider
         console.log('range: '+range)
         this.step=step;
-    var svg = d3.select('#d3slider').select('svg').transition()
+    var svg = this.container.select('svg').transition()
         .attr('width', width)
         .attr('height', height);
 
@@ -157,14 +159,15 @@ export class Slider extends React.Component {
       .attr("y","-30px")
   }
   componentDidMount(){
-    
+    console.log('mouont')
+    //select slider container
+    this.container=d3.select('#d3slider-'+this.props.slider_id)
     //it prop fluid is set set resize event handler
     if(this.props.fluid){
-      window.addEventListener("resize", ()=>this.handleResize(+(d3.select('#d3slider').style("width")).slice(0,-2)-margin.left-margin.right));
+      window.addEventListener("resize", ()=>this.handleResize(+(this.container.style("width")).slice(0,-2)));
     }
-
     var margin = this.config.margin,
-        width = +(d3.select('#d3slider').style("width")).slice(0,-2)-margin.left-margin.right,
+        width = (this.container.style("width")).slice(0,-2),
         height = this.config.height,
         range = [this.state.zoomfloor,this.state.zoomceil]
     
@@ -175,10 +178,9 @@ export class Slider extends React.Component {
 
     this.step=step;
 
-    var svg = d3.select('#d3slider').append('svg')
+    var svg = this.container.append('svg')
         .attr('width', width)
         .attr('height', height);
-
     // using clamp here to avoid slider exceeding the range limits
     this.xScale = d3.scaleLinear()
         .domain(range)
@@ -218,6 +220,7 @@ export class Slider extends React.Component {
     function dragended(d) {
       d3.select(this).select(".rect").remove();
       thisOfClass.dragFinishx=d3.event.x;
+      if(thisOfClass.dragFinishx-thisOfClass.dragStartx<10) return
       thisOfClass.setState({
         zoomceil:Math.ceil(thisOfClass.xScale.invert(thisOfClass.dragFinishx-margin.left)),
         zoomfloor:Math.floor(thisOfClass.xScale.invert(thisOfClass.dragStartx-margin.left))
@@ -235,7 +238,10 @@ export class Slider extends React.Component {
     var slider = svg.append('g')
         .attr('slider', true)
         .attr('transform', 'translate(' + margin.left +', '+ (height/2) + ')');
-
+    
+    //scale to default on double click
+    slider.on('dblclick',()=>{this.handleReset()})
+    
     xScale.clamp(true);
     // drag behavior initialization
     var drag = d3.drag()
@@ -272,9 +278,12 @@ export class Slider extends React.Component {
     }
 
     // drag handle
+
     this.handle = slider.append('circle').classed('handle', true)
         .attr('r', 8);
     var handle=this.handle;
+
+
     this.handleText= slider.append("text").style("text-anchor","middle").attr("y","-10px").text(range[0]);
     // this is the bar on top of above tracks with stroke = transparent and on which the drag behaviour is actually called
     // try removing above 2 tracks and play around with the CSS for this track overlay, you'll see the difference
@@ -289,15 +298,12 @@ export class Slider extends React.Component {
 
   }
   componentDidUpdate(){
-    if(this.props.size){
-
+    if(this.props.config.width){
+      this.handleResize(this.props.config.width)
     }
     else if(this.props.fluid){
-      this.handleResize(+(d3.select('#d3slider').style("width")).slice(0,-2))
+      this.handleResize(+(this.container.style('width')).slice(0,-2))
 
-    }
-    else{
-      this.handleResize(1000)
     }
     this.updateDOMSlider(this.props.d3slider.value)
   }
@@ -305,10 +311,9 @@ export class Slider extends React.Component {
   render() {
     return (
      <div> 
-      <div id='d3slider'></div>
-      <button onClick={this.handleReset}>reset</button>
-      <button onClick={()=>this.handleResize(1000)}>zoomIn</button>    
-      <button onClick={()=>this.handleResize(500)}>zoomOut</button>    
+      <div class='d3slider' id={'d3slider-'+this.props.slider_id}>
+      </div>    
+
     </div>
     );
   }

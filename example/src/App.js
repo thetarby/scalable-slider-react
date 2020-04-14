@@ -20,7 +20,7 @@ class App extends React.Component{
 			slider:{
 			  	value:5, 
 			  	options:{
-			        ceil:1000,
+			        ceil:100,
 			        floor:0,
 			  	}
 			},
@@ -51,11 +51,19 @@ class App extends React.Component{
 		return (
 		<>
 			<ExampleComponent text="SLIDER IT IS 😄" />
+			<p>Double click on slider when you want to scale to default</p>
 			<p>slider value:{this.state.slider.value}</p>
 
-			<Slider config={{height:300, tickCount:100}} fluid items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
+			<Slider slider_id={1} config={{height:90}} fluid items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
 			<button onClick={this.handleClick}>increment</button>
-			<button onClick={()=>this.setState({items:items2})}>change icons</button>
+
+			<Slider slider_id={2} config={{height:90, tickCount:100}} fluid items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
+			<button onClick={this.handleClick}>increment</button>
+
+			
+			<p>This is a fixed size slider unlike above ones it does not change its width when window resizes</p>
+			<Slider slider_id={3} config={{width:500,height:90, tickCount:100}} items={this.state.items} d3slider={this.state.slider} handleChange={this.handleChange} />
+			<button onClick={this.handleClick}>increment</button>
 
 		</>	
 		)
