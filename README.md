@@ -4,6 +4,10 @@
 
 [![NPM](https://img.shields.io/npm/v/scalable-slider-react.svg)](https://www.npmjs.com/package/scalable-slider-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Demo
+
+https://thetarby.github.io/scalable-slider-react
+
 ## Install
 
 ```bash
